@@ -1,0 +1,26 @@
+Index: pango-1.36.0/pango/modules.c
+===================================================================
+--- pango-1.36.0.orig/pango/modules.c	2013-10-21 13:30:58.101193641 +0200
++++ pango-1.36.0/pango/modules.c	2013-10-21 13:30:58.101193641 +0200
+@@ -561,7 +561,7 @@
+ 
+   if (!file_str)
+     {
+-      files = g_new (char *, 3);
++      files = g_new (char *, 4);
+ 
+       files[0] = g_build_filename (pango_get_sysconf_subdirectory (),
+                                    "pango.modules",
+@@ -570,7 +570,11 @@
+                                    MODULE_VERSION,
+                                    "modules.cache",
+                                    NULL);
+-      files[2] = NULL;
++      files[2] = g_build_filename (pango_get_lib_subdirectory (),
++                                   MODULE_VERSION,
++                                   "module-files.d",
++                                   NULL);
++      files[3] = NULL;
+     }
+   else
+     files = pango_split_file_list (file_str);
